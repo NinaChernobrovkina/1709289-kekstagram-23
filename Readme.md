@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Нина Чернобровкина](https://up.htmlacademy.ru/javascript/23/user/1709289).
-* Наставник: [Никита Сигов](https://htmlacademy.ru/profile/crazer).
+* Наставник:  [Никита Сигов](https://htmlacademy.ru/profile/crazer).
 
 ---
 
