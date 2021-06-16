@@ -1,7 +1,7 @@
 function getRandomInt(min, max) {
-  if (max >= min) {
-    return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум и минимум включаются
-  }
+  const diff = Math.abs(max - min);
+  min = Math.min(min, max);
+  return Math.floor(Math.random() * (diff + 1)) + min;
 }
 
 function checkStringLength(string, maxLength) {
