@@ -1,4 +1,4 @@
-import {names, phrases} from './constants.js';
+import {names, phrases} from './constants';
 
 function getRandomInt(min, max) {
   const diff = Math.abs(max - min);
