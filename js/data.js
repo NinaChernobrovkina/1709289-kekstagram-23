@@ -1,4 +1,4 @@
-import {getRandomInt, getRandomMessage, getRandomName} from './util';
+import {getRandomInt, getRandomMessage, getRandomName} from './util.js';
 
 function getRandomComments(photoId) {
   const comments = [];
