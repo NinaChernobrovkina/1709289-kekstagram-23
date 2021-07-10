@@ -13,10 +13,11 @@ function checkStringLength(string, maxLength) {
 function getRandomMessage() {
   const phrasesCount = getRandomInt(1, 2);
   let message = '';
+  const phrasesTmp = phrases.slice();
   for (let counter = 0; counter < phrasesCount; counter++) {
-    const phraseNum = getRandomInt(0, phrases.length - 1);
-    message += ` ${phrases[phraseNum]}`;
-    phrases.splice(phraseNum, 1);
+    const phraseNum = getRandomInt(0, phrasesTmp.length - 1);
+    message += ` ${phrasesTmp[phraseNum]}`;
+    phrasesTmp.splice(phraseNum, 1);
   }
   return message.trim();
 }
