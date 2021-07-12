@@ -27,4 +27,14 @@ function getRandomName() {
   return names[nameNum];
 }
 
-export {getRandomInt, checkStringLength, getRandomMessage, getRandomName};
+function openModal(element) {
+  element.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+}
+
+function closeModal(element) {
+  document.body.classList.remove('modal-open');
+  element.classList.add('hidden');
+}
+
+export {getRandomInt, checkStringLength, getRandomMessage, getRandomName, openModal, closeModal};

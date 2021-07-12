@@ -1,3 +1,5 @@
+import {openModal, closeModal} from './util.js';
+
 const bigPicture = document.querySelector('.big-picture');
 const commentsContainer = bigPicture.querySelector('.social__comments');
 
@@ -19,8 +21,7 @@ function renderComment(comment) {
 }
 
 function renderBigPicture(photo) {
-  bigPicture.classList.remove('hidden');
-  document.body.classList.add('modal-open');
+  openModal(bigPicture);
   bigPicture.querySelector('.big-picture__img > img').src = photo.url;
   bigPicture.querySelector('.likes-count').textContent = photo.likes;
   bigPicture.querySelector('.comments-count').textContent = photo.comments.length;
@@ -34,15 +35,10 @@ function renderBigPicture(photo) {
   });
 }
 
-function closeBigPicture() {
-  document.body.classList.remove('modal-open');
-  bigPicture.classList.add('hidden');
-}
-
-bigPicture.querySelector('.big-picture__cancel').addEventListener('click', closeBigPicture);
+bigPicture.querySelector('.big-picture__cancel').addEventListener('click', () => closeModal(bigPicture));
 document.addEventListener('keydown', (evt) => {
   if (evt.code === 'Escape') {
-    closeBigPicture();
+    closeModal(bigPicture);
   }
 });
 
