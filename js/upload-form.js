@@ -62,6 +62,7 @@ function closeForm() {
   sliderElement.noUiSlider.destroy();
   curEffect = 'none';
   changeEffect();
+  uploadImg.style.transform = '';
 }
 
 resetFormButton.addEventListener('click', closeForm);
