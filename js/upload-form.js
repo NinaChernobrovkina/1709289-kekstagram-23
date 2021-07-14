@@ -10,13 +10,64 @@ const uploadImg = form.querySelector('.img-upload__preview > img');
 const effectLevel = form.querySelector('.effect-level');
 const sliderElement = form.querySelector('.effect-level__slider');
 
-uploadFile.addEventListener('change', () => openModal(formOverlay));
+let curEffect = 'none';
 
-resetFormButton.addEventListener('click', () => closeModal(formOverlay));
+function initSlider() {
+  noUiSlider.create(sliderElement, {
+    start: 1,
+    range: {
+      min: 0,
+      max: 1,
+    },
+    connect: 'lower',
+  });
+  sliderElement.noUiSlider.on('update', (values, handle) => {
+    if (curEffect === 'none') {
+      return;
+    }
+    const filterValue = values[handle];
+    uploadImg.style.filter = `${effectsSettings[curEffect].filter}(${filterValue}${effectsSettings[curEffect].units})`;
+    const percentsValue = Math.round((filterValue - effectsSettings[curEffect].range[0]) / (effectsSettings[curEffect].range[1] - effectsSettings[curEffect].range[0]) * 100);
+    form.querySelector('.effect-level__value').value = `${percentsValue}%`;
+  });
+}
+
+uploadFile.addEventListener('change', () => {
+  openModal(formOverlay);
+  initSlider();
+});
+
+function changeEffect() {
+  uploadImg.className = `effects__preview--${curEffect}`;
+  if (curEffect === 'none') {
+    effectLevel.classList.add('hidden');
+    uploadImg.style.filter = '';
+  } else {
+    effectLevel.classList.remove('hidden');
+    sliderElement.noUiSlider.updateOptions({
+      range: {
+        min: effectsSettings[curEffect].range[0],
+        max: effectsSettings[curEffect].range[1],
+      },
+      start: effectsSettings[curEffect].range[1],
+      step: effectsSettings[curEffect].step,
+    });
+    sliderElement.noUiSlider.set(effectsSettings[curEffect].range[1]);
+  }
+}
+
+function closeForm() {
+  closeModal(formOverlay);
+  form.reset();
+  sliderElement.noUiSlider.destroy();
+  curEffect = 'none';
+  changeEffect();
+}
+
+resetFormButton.addEventListener('click', closeForm);
 document.addEventListener('keydown', (evt) => {
   if (evt.code === 'Escape') {
-    closeModal(formOverlay);
-    form.reset();
+    closeForm();
   }
 });
 
@@ -87,49 +138,13 @@ function onChangeScale(evt) {
 
 form.querySelector('.img-upload__scale').addEventListener('click', onChangeScale);
 
-let curEffect = 'none';
-
 function onChangeEffect(evt) {
   if (!evt.target.closest('label')) {
     return;
   }
   curEffect = evt.target.closest('li').querySelector('input').value;
-  uploadImg.className = `effects__preview--${curEffect}`;
-  if (curEffect === 'none') {
-    effectLevel.classList.add('hidden');
-    uploadImg.style.filter = '';
-  } else {
-    effectLevel.classList.remove('hidden');
-    sliderElement.noUiSlider.updateOptions({
-      range: {
-        min: effectsSettings[curEffect].range[0],
-        max: effectsSettings[curEffect].range[1],
-      },
-      start: effectsSettings[curEffect].range[1],
-      step: effectsSettings[curEffect].step,
-    });
-    sliderElement.noUiSlider.set(effectsSettings[curEffect].range[1]);
-  }
+  changeEffect();
 }
-
-noUiSlider.create(sliderElement, {
-  start: 1,
-  range: {
-    min: 0,
-    max: 1,
-  },
-  connect: 'lower',
-});
-
-sliderElement.noUiSlider.on('update', (values, handle) => {
-  if (curEffect === 'none') {
-    return;
-  }
-  const filterValue = values[handle];
-  uploadImg.style.filter = `${effectsSettings[curEffect].filter}(${filterValue}${effectsSettings[curEffect].units})`;
-  const percentsValue = Math.round((filterValue - effectsSettings[curEffect].range[0]) / (effectsSettings[curEffect].range[1] - effectsSettings[curEffect].range[0]) * 100);
-  form.querySelector('.effect-level__value').value = `${percentsValue}%`;
-});
 
 form.querySelector('.effects__list').addEventListener('click', onChangeEffect);
 
