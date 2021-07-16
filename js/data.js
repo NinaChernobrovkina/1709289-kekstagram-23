@@ -2,11 +2,11 @@ import {getRandomInt, getRandomMessage, getRandomName} from './util.js';
 
 function getRandomComments(photoId) {
   const comments = [];
-  const commentsCount = getRandomInt(0, 4);
+  const commentsCount = getRandomInt(0, 20);
   for (let counter = 0; counter < commentsCount; counter++) {
     const avatarId = getRandomInt(1, 6);
-    const minId = photoId * 100 + 25 * counter;
-    const maxId = minId + 24;
+    const minId = photoId * 100 + 5 * counter;
+    const maxId = minId + 4;
     comments.push({
       id: getRandomInt(minId, maxId),
       avatar: `img/avatar-${avatarId}.svg`,
