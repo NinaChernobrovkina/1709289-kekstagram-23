@@ -27,14 +27,8 @@ function getRandomName() {
   return names[nameNum];
 }
 
-function openModal(element) {
-  element.classList.remove('hidden');
-  document.body.classList.add('modal-open');
+function isEscEvent(evt) {
+  return evt.key === 'Escape' || evt.key === 'Esc';
 }
 
-function closeModal(element) {
-  document.body.classList.remove('modal-open');
-  element.classList.add('hidden');
-}
-
-export {getRandomInt, checkStringLength, getRandomMessage, getRandomName, openModal, closeModal};
+export {getRandomInt, checkStringLength, getRandomMessage, getRandomName, isEscEvent};
