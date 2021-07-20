@@ -57,4 +57,6 @@ const effectsSettings = {
   },
 };
 
-export {names, phrases, effectsSettings, COMMENTS_ON_LOAD, MAX_TAGS, MAX_TAG_LENGTH};
+const GET_PHOTOS_URL = 'https://23.javascript.pages.academy/kekstagram/data';
+
+export {names, phrases, effectsSettings, COMMENTS_ON_LOAD, MAX_TAGS, MAX_TAG_LENGTH, GET_PHOTOS_URL};

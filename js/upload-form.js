@@ -1,4 +1,6 @@
-import {openModal, closeModal, checkStringLength} from './util.js';
+import {checkStringLength} from './util.js';
+import {openModal, showModalByTemplate} from './modal.js';
+import {sendFormData} from './network.js';
 import {effectsSettings, MAX_TAGS, MAX_TAG_LENGTH} from './constants.js';
 
 const form = document.querySelector('#upload-select-image');
@@ -11,6 +13,7 @@ const effectLevel = form.querySelector('.effect-level');
 const sliderElement = form.querySelector('.effect-level__slider');
 
 let curEffect = 'none';
+let modalForm;
 
 function initSlider() {
   noUiSlider.create(sliderElement, {
@@ -32,11 +35,6 @@ function initSlider() {
   });
 }
 
-uploadFile.addEventListener('change', () => {
-  openModal(formOverlay);
-  initSlider();
-});
-
 function changeEffect() {
   uploadImg.className = `effects__preview--${curEffect}`;
   if (curEffect === 'none') {
@@ -57,7 +55,6 @@ function changeEffect() {
 }
 
 function closeForm() {
-  closeModal(formOverlay);
   form.reset();
   sliderElement.noUiSlider.destroy();
   curEffect = 'none';
@@ -65,11 +62,12 @@ function closeForm() {
   uploadImg.style.transform = '';
 }
 
-resetFormButton.addEventListener('click', closeForm);
-document.addEventListener('keydown', (evt) => {
-  if (evt.code === 'Escape') {
-    closeForm();
-  }
+uploadFile.addEventListener('change', () => {
+  modalForm = openModal(formOverlay, {
+    closeButton: resetFormButton,
+    afterClose: closeForm,
+  });
+  initSlider();
 });
 
 function checkHashTags() {
@@ -150,3 +148,19 @@ function onChangeEffect(evt) {
 form.querySelector('.effects__list').addEventListener('click', onChangeEffect);
 
 submitButton.addEventListener('click', validateForm);
+
+form.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  sendFormData(evt.target)
+    .then((response) => {
+      modalForm.closeModal();
+      if (response.ok) {
+        showModalByTemplate('success');
+      } else {
+        showModalByTemplate('error');
+      }
+    }).catch(() => {
+      modalForm.closeModal();
+      showModalByTemplate('error');
+    });
+});
