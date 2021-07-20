@@ -1,16 +1,11 @@
 import {getData} from './network.js';
-import {renderPicture, picturesContainer} from './render-pictures.js';
-import {renderBigPicture} from './render-big-picture.js';
+import {renderPhotos} from './render-pictures.js';
 import {showModalByTemplate} from './modal.js';
+import {initFilter} from './filter.js';
 
-getData().then((data) => {
-  const fragment = document.createDocumentFragment();
-  data.forEach((photo) => {
-    const picture = renderPicture(photo);
-    picture.addEventListener('click', () => renderBigPicture(photo));
-    fragment.appendChild(picture);
-  });
-  picturesContainer.appendChild(fragment);
+getData().then((photos) => {
+  renderPhotos(photos);
+  initFilter(photos);
 }).catch(() => showModalByTemplate('error', {
   titleText: 'Ошибка загрузки данных с сервера',
   buttonText: 'Закрыть',

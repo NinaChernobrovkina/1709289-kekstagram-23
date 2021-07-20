@@ -1,3 +1,5 @@
+import {renderBigPicture} from './render-big-picture.js';
+
 const picturesContainer = document.querySelector('.pictures');
 
 const pictureTemplate = document.querySelector('#picture').content.children[0];
@@ -10,4 +12,15 @@ function renderPicture(photo) {
   return picture;
 }
 
-export {renderPicture, picturesContainer};
+function renderPhotos(photos) {
+  const fragment = document.createDocumentFragment();
+  photos.forEach((photo) => {
+    const picture = renderPicture(photo);
+    picture.addEventListener('click', () => renderBigPicture(photo));
+    fragment.appendChild(picture);
+  });
+  picturesContainer.querySelectorAll('.picture').forEach((picture) => picture.remove());
+  picturesContainer.appendChild(fragment);
+}
+
+export {renderPhotos};

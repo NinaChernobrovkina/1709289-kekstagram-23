@@ -59,4 +59,6 @@ const effectsSettings = {
 
 const GET_PHOTOS_URL = 'https://23.javascript.pages.academy/kekstagram/data';
 
-export {names, phrases, effectsSettings, COMMENTS_ON_LOAD, MAX_TAGS, MAX_TAG_LENGTH, GET_PHOTOS_URL};
+const RANDOM_FILTER_COUNT = 10;
+
+export {names, phrases, effectsSettings, COMMENTS_ON_LOAD, MAX_TAGS, MAX_TAG_LENGTH, GET_PHOTOS_URL, RANDOM_FILTER_COUNT};

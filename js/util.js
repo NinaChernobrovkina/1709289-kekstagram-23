@@ -10,16 +10,21 @@ function checkStringLength(string, maxLength) {
   return string.length <= maxLength;
 }
 
+function getRandomElementsFromArray(array, count) {
+  count = Math.min(count, array.length);
+  const arrayCopy = array.slice();
+  const elements = [];
+  for (let counter = 0; counter < count; counter++) {
+    const index = getRandomInt(0, arrayCopy.length - 1);
+    elements.push(arrayCopy[index]);
+    arrayCopy.splice(index, 1);
+  }
+  return elements;
+}
+
 function getRandomMessage() {
   const phrasesCount = getRandomInt(1, 2);
-  let message = '';
-  const phrasesTmp = phrases.slice();
-  for (let counter = 0; counter < phrasesCount; counter++) {
-    const phraseNum = getRandomInt(0, phrasesTmp.length - 1);
-    message += ` ${phrasesTmp[phraseNum]}`;
-    phrasesTmp.splice(phraseNum, 1);
-  }
-  return message.trim();
+  return getRandomElementsFromArray(phrases, phrasesCount).join(' ');
 }
 
 function getRandomName() {
@@ -31,4 +36,4 @@ function isEscEvent(evt) {
   return evt.key === 'Escape' || evt.key === 'Esc';
 }
 
-export {getRandomInt, checkStringLength, getRandomMessage, getRandomName, isEscEvent};
+export {getRandomInt, checkStringLength, getRandomMessage, getRandomName, isEscEvent, getRandomElementsFromArray};
