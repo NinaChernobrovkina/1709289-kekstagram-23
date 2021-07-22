@@ -1,25 +1,3 @@
-const names = [
-  'Анатолий',
-  'Андокид',
-  'Андрей',
-  'Андроник',
-  'Аникита',
-  'Аннерс',
-  'Анри',
-  'Ансельм',
-  'Антипа',
-  'Антон',
-];
-
-const phrases = [
-  'Всё отлично!',
-  'В целом всё неплохо. Но не всё.',
-  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
-  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
-  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
-];
-
 const COMMENTS_ON_LOAD = 5;
 const MAX_TAGS = 5;
 const MAX_TAG_LENGTH = 20;
@@ -61,4 +39,4 @@ const GET_PHOTOS_URL = 'https://23.javascript.pages.academy/kekstagram/data';
 
 const RANDOM_FILTER_COUNT = 10;
 
-export {names, phrases, effectsSettings, COMMENTS_ON_LOAD, MAX_TAGS, MAX_TAG_LENGTH, GET_PHOTOS_URL, RANDOM_FILTER_COUNT};
+export {effectsSettings, COMMENTS_ON_LOAD, MAX_TAGS, MAX_TAG_LENGTH, GET_PHOTOS_URL, RANDOM_FILTER_COUNT};

@@ -1,5 +1,3 @@
-import {names, phrases} from './constants.js';
-
 function getRandomInt(min, max) {
   const diff = Math.abs(max - min);
   min = Math.min(min, max);
@@ -22,18 +20,8 @@ function getRandomElementsFromArray(array, count) {
   return elements;
 }
 
-function getRandomMessage() {
-  const phrasesCount = getRandomInt(1, 2);
-  return getRandomElementsFromArray(phrases, phrasesCount).join(' ');
-}
-
-function getRandomName() {
-  const nameNum = getRandomInt(0, names.length - 1);
-  return names[nameNum];
-}
-
 function isEscEvent(evt) {
   return evt.key === 'Escape' || evt.key === 'Esc';
 }
 
-export {getRandomInt, checkStringLength, getRandomMessage, getRandomName, isEscEvent, getRandomElementsFromArray};
+export {getRandomInt, checkStringLength, isEscEvent, getRandomElementsFromArray};

@@ -109,7 +109,7 @@ function checkHashTags() {
   return true;
 }
 
-function validateForm() {
+function onClickSubmit() {
   checkHashTags();
 }
 
@@ -147,7 +147,7 @@ function onChangeEffect(evt) {
 
 form.querySelector('.effects__list').addEventListener('click', onChangeEffect);
 
-submitButton.addEventListener('click', validateForm);
+submitButton.addEventListener('click', onClickSubmit);
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
